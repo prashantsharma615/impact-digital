@@ -8,7 +8,7 @@ const DEFAULT_AGENCY_DATA = {
   subTagline: "Elevate your digital footprint with high-converting social strategies, cinematic content, and audience visibility.",
   coreValues: ["Ideas", "Strategy", "Visibility", "Growth"],
   contact: {
-    email: "hello@impactdigital.agency",
+    email: "impactdigital642@gmail.com",
     phone: "+91 7006181540",
     location: "Jammu & Kashmir / Delhi NCR, India"
   },
@@ -174,6 +174,12 @@ function renderContent() {
     contactPhone.textContent = agencyData.contact.phone;
     contactPhone.href = `tel:${agencyData.contact.phone.replace(/[^0-9+]/g, "")}`;
   }
+
+  const contactEmail = document.getElementById("contact-email-display");
+  if (contactEmail) {
+    contactEmail.textContent = agencyData.contact.email;
+    contactEmail.href = `mailto:${agencyData.contact.email}`;
+  }
 }
 
 // Toast helper
@@ -332,6 +338,7 @@ function setupAdminPortal() {
     document.getElementById("admin-subtagline").value = agencyData.subTagline || "";
     document.getElementById("admin-core-values").value = (agencyData.coreValues || []).join(", ");
     document.getElementById("admin-agency-phone").value = agencyData.contact?.phone || "";
+    document.getElementById("admin-agency-email").value = agencyData.contact?.email || "";
 
     // Partners
     if (agencyData.partners && agencyData.partners.length >= 3) {
@@ -373,6 +380,7 @@ function setupAdminPortal() {
         .map((s) => s.trim())
         .filter(Boolean);
       agencyData.contact.phone = document.getElementById("admin-agency-phone").value.trim();
+      agencyData.contact.email = document.getElementById("admin-agency-email").value.trim();
 
       // Partners
       agencyData.partners[0].name = document.getElementById("admin-p1-name").value.trim();
