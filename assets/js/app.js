@@ -48,7 +48,39 @@ const DEFAULT_AGENCY_DATA = {
     clients: "50+",
     growthRate: "340%",
     retention: "98%"
-  }
+  },
+  testimonials: [
+    {
+      id: "t1",
+      name: "Rahul Mehta",
+      role: "Business Owner",
+      text: "Impact Digital completely transformed our Instagram presence. In just 3 months, our followers doubled and our engagement went through the roof!",
+      rating: 5,
+      image: "assets/images/media_1793176935437.jpg"
+    },
+    {
+      id: "t2",
+      name: "Priya Sharma",
+      role: "Fashion Influencer",
+      text: "The team at Impact Digital knows exactly how to craft content that resonates. Our brand collaborations tripled after working with them.",
+      rating: 5,
+      image: "assets/images/media_1793176943022.jpg"
+    },
+    {
+      id: "t3",
+      name: "Arjun Kapoor",
+      role: "Startup Founder",
+      text: "From zero to 50K followers in 6 months — Impact Digital's strategy is unmatched. They truly live up to their name!",
+      rating: 5,
+      image: "assets/images/media_1793176955502.jpg"
+    }
+  ],
+  clientPics: [
+    "assets/images/media_1793176935437.jpg",
+    "assets/images/media_1793176943022.jpg",
+    "assets/images/media_1793176955502.jpg",
+    "assets/images/media_1793176978234.jpg"
+  ]
 };
 
 const STORAGE_KEYS = {
@@ -167,6 +199,36 @@ function renderContent() {
   if (footerFb) footerFb.href = agencyData.socials.facebook;
   const footerYt = document.getElementById("footer-link-youtube");
   if (footerYt) footerYt.href = agencyData.socials.youtube;
+
+  // Render Testimonials
+  const testimonialsContainer = document.getElementById("testimonials-list");
+  if (testimonialsContainer && Array.isArray(agencyData.testimonials)) {
+    testimonialsContainer.innerHTML = agencyData.testimonials.map(t => `
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          ${'<i class="fas fa-star"></i>'.repeat(t.rating || 5)}
+        </div>
+        <p class="testimonial-text">"${t.text}"</p>
+        <div class="testimonial-author">
+          <img src="${t.image}" alt="${t.name}" class="testimonial-avatar" onerror="this.src='assets/images/impact-logo.jpg'">
+          <div>
+            <h5 class="testimonial-name">${t.name}</h5>
+            <span class="testimonial-role">${t.role}</span>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  // Render Client Pics Strip
+  const clientsPicsRow = document.getElementById("clients-pics-row");
+  if (clientsPicsRow && Array.isArray(agencyData.clientPics)) {
+    clientsPicsRow.innerHTML = agencyData.clientPics.map(pic => `
+      <div class="client-pic-bubble">
+        <img src="${pic}" alt="Client" onerror="this.src='assets/images/impact-logo.jpg'">
+      </div>
+    `).join("");
+  }
 
   // Contact details
   const contactPhone = document.getElementById("contact-phone-display");
